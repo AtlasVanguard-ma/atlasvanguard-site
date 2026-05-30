@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SIGCard from '../components/SIGCard.astro';
 import sigs from '../data/sigs.json';
+import { Users } from 'lucide-astro';
 
 const sigCards = sigs.map((sig) => ({
   ...sig,
@@ -15,7 +16,10 @@ const sigCards = sigs.map((sig) => ({
 >
   <section class="page-frame site-shell">
     <span class="page-kicker">SIGs</span>
-    <h1>Special Interest Groups</h1>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <Users size={32} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
+      <h1 style="margin: 0;">Special Interest Groups</h1>
+    </div>
     <p class="page-intro">
       SIGs are the operational core of AtlasVanguard. Each group owns a domain of financial observability and operates under a defined charter.
     </p>

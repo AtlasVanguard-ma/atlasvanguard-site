@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BASE } from '../lib/site.js';
+import { Gavel, BookOpen, ShieldCheck } from 'lucide-astro';
 
 const missionPoints = [
   'Support transparent financial research',
@@ -135,7 +136,10 @@ const governanceBrief = [
     </section>
 
     <section class="rule-section">
-      <h2>Steering Committee</h2>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <Gavel size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+        <h2 style="margin: 0;">Steering Committee</h2>
+      </div>
       <div class="two-col">
         <article class="card surface">
           <p>
@@ -170,7 +174,10 @@ const governanceBrief = [
     </section>
 
     <section class="rule-section">
-      <h2>RFC Process (How changes are proposed)</h2>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <BookOpen size={24} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
+        <h2 style="margin: 0;">RFC Process (How changes are proposed)</h2>
+      </div>
       <p class="content">
         All meaningful changes to research methods, scope, or governance follow a Request for Comments (RFC) process. This ensures that every change is discussed openly, documented, and traceable.
       </p>
@@ -192,7 +199,10 @@ const governanceBrief = [
     </section>
 
     <section class="rule-section ethics-panel surface">
-      <h2>Research Ethics &amp; Integrity</h2>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <ShieldCheck size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+        <h2 style="margin: 0;">Research Ethics &amp; Integrity</h2>
+      </div>
       <div class="ethics-grid">
         {ethicsPoints.map((point) => <div class="ethics-item">{point}</div>)}
       </div>
@@ -351,6 +361,7 @@ const governanceBrief = [
   .ethics-panel {
     border-left: 4px solid var(--gold);
     background: #fffdf8;
+    padding-left: 1.25rem;
   }
 
   .ethics-grid {

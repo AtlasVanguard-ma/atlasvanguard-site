@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Workflow, CheckCircle, Zap } from 'lucide-astro';
 
 const implemented = [
   'Data extraction (YFinance, CSV)',
@@ -57,7 +58,10 @@ const engines = [
     </section>
 
     <section class="rule-section">
-      <h2>Pipeline architecture</h2>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <Workflow size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+        <h2 style="margin: 0;">Pipeline architecture</h2>
+      </div>
 
       <div class="pipeline-diagram" role="img" aria-label="Pipeline architecture">
         <div class="pipe-row">
@@ -86,7 +90,10 @@ const engines = [
     </section>
 
     <section class="rule-section">
-      <h2>How it works</h2>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <Zap size={24} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
+        <h2 style="margin: 0;">How it works</h2>
+      </div>
 
       <details class="component" open>
         <summary>Data Sources — where the raw inputs come from</summary>
@@ -125,7 +132,10 @@ const engines = [
     </section>
 
     <section class="rule-section">
-      <h2>Quant engines — at a glance</h2>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <CheckCircle size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+        <h2 style="margin: 0;">Quant engines — at a glance</h2>
+      </div>
       <div class="table-wrap">
         <table class="engines-table">
           <thead>

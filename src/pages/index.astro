@@ -5,20 +5,10 @@ import ReportCard from '../components/ReportCard.astro';
 import { getCollection } from 'astro:content';
 import sigs from '../data/sigs.json';
 import { BASE } from '../lib/site.js';
+import { TrendingUp, Building2, FileText, UserPlus } from 'lucide-astro';
 
 const reportEntries = await getCollection('reports');
-const reports = reportEntries
-  .sort((left, right) => right.data.date.valueOf() - left.data.date.valueOf())
-  .slice(0, 4)
-  .map((report) => ({
-    slug: report.id,
-    title: report.data.title,
-    date: new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' }).format(report.data.date),
-    category: report.data.category,
-    abstract: report.data.abstract,
-    authors: report.data.authors,
-    chartImage: report.data.chartImage,
-  }));
+const reports = [];
 
 const sigCards = sigs.map((sig) => ({
   ...sig,
@@ -54,7 +44,10 @@ const sigCards = sigs.map((sig) => ({
 
     <section class="rule-section">
       <div class="section-title-row">
-        <h2>Why Morocco now?</h2>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <TrendingUp size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+          <h2 style="margin: 0;">Why Morocco now?</h2>
+        </div>
       </div>
       <div class="two-col">
         <article class="card surface">
@@ -82,7 +75,10 @@ const sigCards = sigs.map((sig) => ({
 
     <section class="rule-section">
       <div class="section-title-row">
-        <h2>Governance &amp; SIGs</h2>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <Building2 size={24} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
+          <h2 style="margin: 0;">Governance &amp; SIGs</h2>
+        </div>
         <a href={`${BASE}sigs/`}>View all SIGs</a>
       </div>
       <p class="content">
@@ -100,17 +96,27 @@ const sigCards = sigs.map((sig) => ({
 
     <section class="rule-section">
       <div class="section-title-row">
-        <h2>Latest Reports</h2>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <FileText size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+          <h2 style="margin: 0;">Latest Reports</h2>
+        </div>
         <a href={`${BASE}reports/`}>Browse reports</a>
       </div>
       <div class="card-list tight">
-        {reports.map((report) => <ReportCard report={report} reportUrl={`/reports/${report.slug}/`} />)}
+        {reports.length > 0 ? (
+          reports.map((report) => <ReportCard report={report} reportUrl={`/reports/${report.slug}/`} />)
+        ) : (
+          <p class="muted">No reports yet</p>
+        )}
       </div>
     </section>
 
     <section class="rule-section">
       <article class="card surface">
-        <h2>Join through a structured intake process</h2>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <UserPlus size={24} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
+          <h2 style="margin: 0;">Join through a structured intake process</h2>
+        </div>
         <p>
           Contributors apply through the membership form, are reviewed against the initiative’s research and engineering focus, and then join the Slack workspace after acceptance.
         </p>

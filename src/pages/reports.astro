@@ -2,22 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ReportCard from '../components/ReportCard.astro';
 import { getCollection } from 'astro:content';
+import { BarChart3 } from 'lucide-astro';
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' }).format(date);
 
 const reportEntries = await getCollection('reports');
-const reports = reportEntries
-  .sort((left, right) => right.data.date.valueOf() - left.data.date.valueOf())
-  .map((report) => ({
-    slug: report.id,
-    title: report.data.title,
-    date: formatDate(report.data.date),
-    category: report.data.category,
-    abstract: report.data.abstract,
-    authors: report.data.authors,
-    chartImage: report.data.chartImage,
-  }));
+ const reports = [];
 
 const categories = ['All', ...new Set(reports.map((report) => report.category))];
 ---
@@ -28,21 +19,15 @@ const categories = ['All', ...new Set(reports.map((report) => report.category))]
 >
   <section class="page-frame site-shell">
     <span class="page-kicker">Reports</span>
-    <h1>Research Reports &amp; Outputs</h1>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <BarChart3 size={32} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
+      <h1 style="margin: 0;">Research Reports &amp; Outputs</h1>
+    </div>
     <p class="page-intro">Peer-reviewed, reproducible analysis of Moroccan financial markets.</p>
 
     <section class="rule-section">
-      <div class="filter-bar">
-        <label for="report-filter">Filter by category</label>
-        <select id="report-filter" name="report-filter">
-          {categories.map((category) => <option value={category}>{category}</option>)}
-        </select>
-      </div>
-      <p class="small-note" style="margin-top: 0.75rem;">With JavaScript disabled, all reports remain visible.</p>
-    </section>
 
-    <section id="report-list" class="rule-section card-list">
-      {reports.map((report) => <ReportCard report={report} reportUrl={`/reports/${report.slug}/`} />)}
+      <p class="muted">No reports available yet.</p>
     </section>
 
     <script type="module">

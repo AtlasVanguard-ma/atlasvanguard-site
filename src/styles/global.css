@@ -337,10 +337,8 @@ tbody td:first-child {
   font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
-}
-
-.brand {
-  overflow: visible;
+  overflow: hidden;
+  max-height: 5.3rem;
 }
 
 .brand-mark {
