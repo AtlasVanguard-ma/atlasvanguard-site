@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BASE } from '../lib/site.js';
 
 const missionPoints = [
   'Support transparent financial research',
@@ -164,7 +165,7 @@ const governanceBrief = [
         SIGs are the working units of AtlasVanguard. Each group owns a specific domain, such as quantitative models or data infrastructure. They operate autonomously within their charters and report to the Steering Committee when needed.
       </p>
       <div class="inline-links">
-        <a href="/sigs/">Explore the five active SIGs →</a>
+        <a href={`${BASE}sigs/`}>Explore the five active SIGs →</a>
       </div>
     </section>
 
@@ -214,7 +215,7 @@ const governanceBrief = [
     <section class="rule-section">
       <h2>Contribution model</h2>
       <p class="content">
-        Contributors are welcomed from academia, industry, and the open-source community. All contributions are reviewed for quality, reproducibility, and alignment with the mission. See how to join → <a href="/contribute/">Join Us</a>
+        Contributors are welcomed from academia, industry, and the open-source community. All contributions are reviewed for quality, reproducibility, and alignment with the mission. See how to join → <a href={`${BASE}contribute/`}>Join Us</a>
       </p>
     </section>
 

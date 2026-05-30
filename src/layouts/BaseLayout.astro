@@ -1,16 +1,18 @@
 ---
 import '../styles/global.css';
 
+import { BASE } from '../lib/site.js';
+
 const { title, description = '', activePath = Astro.url.pathname } = Astro.props;
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/project/', label: 'Project' },
-  { href: '/governance/', label: 'Governance' },
-  { href: '/sigs/', label: 'SIGs' },
-  { href: '/rfcs/', label: 'RFCs' },
-  { href: '/reports/', label: 'Reports' },
-  { href: '/contribute/', label: 'Join Us' },
+  { href: BASE, label: 'Home' },
+  { href: `${BASE}project/`, label: 'Project' },
+  { href: `${BASE}governance/`, label: 'Governance' },
+  { href: `${BASE}sigs/`, label: 'SIGs' },
+  { href: `${BASE}rfcs/`, label: 'RFCs' },
+  { href: `${BASE}reports/`, label: 'Reports' },
+  { href: `${BASE}contribute/`, label: 'Join Us' },
 ];
 
 const isActive = (href) => {
@@ -36,9 +38,8 @@ const isActive = (href) => {
   <body>
     <header class="nav-bar">
       <div class="site-shell">
-        <a class="brand" href="/" aria-label="AtlasVanguard home">
-          <img src="/images/main.png" alt="" class="brand-mark" />
-          <span>AtlasVanguard</span>
+        <a class="brand" href={BASE} aria-label="AtlasVanguard home">
+          <img src={BASE + 'images/main.png'} alt="AtlasVanguard" class="brand-mark" />
         </a>
         <nav aria-label="Primary">
           <div class="nav-links">
