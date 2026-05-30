@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const implemented = [
+  'Data extraction (YFinance, CSV)',
+  'Canonical normalisation (OHLCV schema & provenance)',
+  'Idempotent loader into PostgreSQL',
+  'Asset management and metadata',
+  'Quant engine execution and persistence (returns, volatility, correlation, beta, drawdown)',
+  'HTTP API exposing time-series and aggregated metrics',
+];
+
+const planned = [
+  'Expanded automated test coverage and CI',
+  'Production-grade logging, monitoring and alerting',
+  'Orchestration for scheduled incremental runs and DAGs',
+  'Tighter integration with report-generation tooling',
+];
+
+const principles = [
+  { title: 'Reproducible by design', body: 'Every analytical step is versioned, parameterised, and re-runnable; claims must be auditable.' },
+  { title: 'Incremental & idempotent', body: 'Safe to re-run daily: database constraints and upserts prevent duplication.' },
+  { title: 'Modular & composable', body: 'Extractors, normalisers, engines, and storage are separated so components can evolve independently.' },
+  { title: 'Transparent & inspectable', body: 'Code, assumptions, and provenance are recorded to build trust with researchers and supervisors.' },
+];
+
+const engines = [
+  { category: 'Returns', what: 'Simple, log and cumulative returns; rolling multi-period returns', example: 'Asset performance, benchmark-relative returns' },
+  { category: 'Volatility', what: 'Realised (rolling) and EWMA volatility measures', example: 'Detecting regime shifts, cross-sector risk comparisons' },
+  { category: 'Correlation', what: 'Rolling Pearson correlations between series', example: 'Contagion detection and stress analysis' },
+  { category: 'Beta', what: 'Rolling market-sensitivity estimates', example: 'Hedge ratio estimation and systematic risk decomposition' },
+  { category: 'Rolling stats & drawdown', what: 'Moving averages, z-scores, and drawdown calculations', example: 'Signal smoothing, outlier detection, drawdown monitoring' },
+];
+---
+
+<BaseLayout title="Project" description="Modular, reproducible financial observability infrastructure for Morocco’s markets.">
+  <section class="page-frame site-shell">
+    <span class="page-kicker">Project</span>
+    <h1>Project</h1>
+    <p class="page-intro">Modular, reproducible financial observability infrastructure for Morocco’s evolving markets.</p>
+
+    <p>
+      AtlasVanguard is more than a codebase. It is a shared infrastructure layer where financial domain expertise, quantitative research, and software engineering converge to produce trustworthy market observability. The system ingests raw market data, applies rigorous analytical methods, and surfaces derived metrics that serve researchers, risk analysts, and regulators alike.
+    </p>
+
+    <p>
+      This page describes the core technical system: how data flows from sources to storage, how quant engines produce reproducible analytics, and how the architecture supports transparency and incremental improvement. Whether you come from finance, engineering, or supervision, you should leave with a clear understanding of what AtlasVanguard builds and how it operates.
+    </p>
+
+    <section class="rule-section">
+      <div class="callout">
+        <strong>Why this infrastructure exists</strong>
+        <p>
+          Morocco’s introduction of derivatives and ongoing market modernisation create a new observability burden. Institutions need systematic visibility into volatility regimes, cross-asset correlations, and systemic stress signals. AtlasVanguard provides open, reproducible infrastructure to meet that need — not ad-hoc analysis.
+        </p>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Pipeline architecture</h2>
+
+      <div class="pipeline-diagram" role="img" aria-label="Pipeline architecture">
+        <div class="pipe-row">
+          <div class="pipe-box">Data Sources</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box">Extractors</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box">Normaliser</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box">Loader</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box">PostgreSQL</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box">Quant Engines</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box">Derived Tables</div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-box implemented">API</div>
+        </div>
+      </div>
+
+      <div class="pipeline-notes">
+        <span class="note">Idempotent writes — safe to re-run</span>
+        <span class="note">Incremental ingestion — only new data processed</span>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>How it works</h2>
+
+      <details class="component" open>
+        <summary>Data Sources — where the raw inputs come from</summary>
+        <p>
+          Public market feeds (YFinance) and curated historical CSV files from local exchanges (e.g., Casablanca) provide raw OHLCV inputs. The system currently supports equities and indices and is designed to add futures or other asset classes as data availability improves.
+        </p>
+      </details>
+
+      <details class="component">
+        <summary>Extraction &amp; Normalisation — turning heterogeneous feeds into a canonical series</summary>
+        <p>
+          Raw records are fetched, aligned, and mapped to a canonical OHLCV schema with explicit metadata fields (source, retrieval time, value_kind). Normalisation includes parsing timestamps, renaming columns, filling obvious gaps, and enforcing sanity checks (for example, high &ge; low). This step is critical: credible analytics require consistent, provenance-rich inputs.
+        </p>
+      </details>
+
+      <details class="component">
+        <summary>Idempotent Loader — safe, efficient persistence</summary>
+        <p>
+          Clean records are written to PostgreSQL using bulk operations with unique constraints and upsert semantics (<code>ON CONFLICT DO NOTHING</code> / controlled upserts). Idempotency ensures re-running jobs does not create duplicates; incremental ingestion consults each asset’s last stored date to fetch only new observations, keeping runs efficient and bounded.
+        </p>
+      </details>
+
+      <details class="component">
+        <summary>Quant Engines — reproducible analytics</summary>
+        <p>
+          Engines are implemented as parameterised Python/Pandas functions with explicit inputs and outputs. They compute returns (simple/log), realised and EWMA volatility, rolling correlations, beta estimates, and drawdowns. Jobs run engines against canonical series and persist results to derived tables using the same idempotent patterns.
+        </p>
+      </details>
+
+      <details class="component">
+        <summary>API — programmatic access to observability signals</summary>
+        <p>
+          A lightweight HTTP API exposes time-series slices, asset metadata, and pre-computed analytics for dashboards, reproducible reports, and external consumers. Endpoints are designed for clarity (time range, asset id, metric) and provenance (version, parameters used).
+        </p>
+      </details>
+    </section>
+
+    <section class="rule-section">
+      <h2>Quant engines — at a glance</h2>
+      <div class="table-wrap">
+        <table class="engines-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>What it computes</th>
+              <th>Example use</th>
+            </tr>
+          </thead>
+          <tbody>
+            {engines.map((e) => (
+              <tr>
+                <td class="mono">{e.category}</td>
+                <td>{e.what}</td>
+                <td class="muted">{e.example}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="small-note">Engines are declaratively scheduled; default configuration computes simple/log returns, 20‑day realised volatility, and a 20‑day EWMA volatility by default.</p>
+    </section>
+
+    <section class="rule-section two-col status-grid">
+      <div>
+        <h2>Current status</h2>
+        <h3 class="status-heading teal">Implemented</h3>
+        <ul class="tight-list implemented">
+          {implemented.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="status-heading gold">In progress / planned</h3>
+        <ul class="tight-list planned">
+          {planned.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Design principles</h2>
+      <div class="principles-grid">
+        {principles.map((p) => (
+          <article class="card surface principle">
+            <h3>{p.title}</h3>
+            <p class="muted">{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Technology stack</h2>
+      <div class="card surface muted-card">
+        <ul class="stack-list">
+          <li><strong>Data processing:</strong> Python (Pandas, NumPy)</li>
+          <li><strong>Database:</strong> PostgreSQL (SQLAlchemy)</li>
+          <li><strong>Sources:</strong> YFinance, Casablanca CSV feeds</li>
+          <li><strong>Execution:</strong> Python runner with idempotent upserts</li>
+          <li><strong>API:</strong> FastAPI (Uvicorn)</li>
+          <li><strong>Migrations &amp; CI:</strong> Alembic, GitHub</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Source code</h2>
+      <p>The full source is maintained in the private repository(will be public after official release): <a href="https://github.com/AtlasVanguard-ma/atlasvanguard-core" target="_blank" rel="noopener noreferrer">View atlasvanguard-core on GitHub</a></p>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .callout { border-left:4px solid var(--gold); padding:0.8rem 1rem; background:var(--card); border-radius:6px; margin-bottom:1rem; }
+  .callout p { margin:0.35rem 0 0 0; color:var(--text); }
+
+  .pipeline-diagram { display:flex; justify-content:center; margin:0.5rem 0 0.75rem; overflow:auto; }
+  .pipe-row { display:flex; gap:0.5rem; align-items:center; white-space:nowrap; }
+  .pipe-box { padding:0.55rem 0.85rem; border:1px solid var(--border); background:var(--card); border-radius:6px; font-weight:700; font-family:var(--serif); }
+  .pipe-box.implemented { box-shadow:none; }
+  .pipe-arrow { color:var(--gold); font-weight:800; padding:0 0.35rem; }
+
+  .pipeline-notes { display:flex; gap:0.9rem; margin-top:0.6rem; font-size:0.92rem; color:var(--text-muted); }
+  .pipeline-notes .note { padding:0.28rem 0.55rem; border-radius:6px; border:1px dashed var(--border); background:transparent; }
+
+  details.component { margin:0.6rem 0; padding:0.6rem 0.85rem; border-radius:6px; border:1px solid var(--border); background:var(--card); }
+  details.component summary { cursor:pointer; list-style:none; font-weight:700; color:var(--gold); }
+  details.component summary::marker { content: none; }
+  details.component summary::after { content: ' +'; float:right; color:var(--teal); font-weight:700; }
+  details.component[open] summary::after { content: ' −'; }
+  details.component[open] summary { color:var(--teal); }
+
+  .table-wrap { overflow:auto; }
+  .engines-table { width:100%; border-collapse:collapse; }
+  .engines-table thead th { text-align:left; padding:0.6rem 0.6rem; border-bottom:2px solid var(--border); color:var(--teal); }
+  .engines-table tbody td { padding:0.55rem 0.6rem; border-bottom:1px solid var(--border); }
+  .engines-table .mono { font-family:var(--mono); }
+
+  .two-col { display:grid; gap:1rem; }
+  @media(min-width:720px) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+  .status-grid { gap:1.25rem; margin-top:0.6rem; }
+  .status-heading { margin:0.45rem 0; font-size:0.98rem; }
+  .status-heading.teal { color:var(--teal); }
+  .status-heading.gold { color:var(--gold); }
+
+  .tight-list { padding-left:1.05rem; margin:0; display:grid; gap:0.45rem; }
+  .implemented li { color:var(--text); }
+  .planned li { color:var(--text-muted); }
+
+  .principles-grid { display:grid; gap:0.9rem; margin-top:0.6rem; }
+  @media(min-width:720px) { .principles-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+
+  .principle h3 { margin:0 0 0.4rem 0; }
+  .muted { color:var(--text-muted); }
+  .muted-card { background: #fbfbfa; border-left:4px solid var(--gold); padding:0.75rem; }
+
+  .stack-list { margin:0; padding-left:1.05rem; display:grid; gap:0.4rem; }
+</style>

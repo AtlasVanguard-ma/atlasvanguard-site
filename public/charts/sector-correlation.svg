@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder chart for sector correlation">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <rect x="40" y="40" width="720" height="420" rx="4" fill="#fafaf8" stroke="#e5e1dc"/>
+  <g fill="none" stroke="#2c5f7c" stroke-width="4">
+    <circle cx="270" cy="250" r="105" opacity="0.18"/>
+    <circle cx="470" cy="220" r="140" opacity="0.08"/>
+    <path d="M180 340 L350 170 L550 290"/>
+    <path d="M250 170 L470 360 L610 160" stroke="#9b7d3c"/>
+  </g>
+  <text x="90" y="90" font-family="Inter, Arial, sans-serif" font-size="28" fill="#1a1a1a">Sector Correlation (1M)</text>
+  <text x="90" y="125" font-family="Inter, Arial, sans-serif" font-size="18" fill="#5a5855">Placeholder graphic for cross-asset relationships</text>
+</svg>

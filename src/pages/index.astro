@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MetricCard from '../components/MetricCard.astro';
+import ReportCard from '../components/ReportCard.astro';
+import { getCollection } from 'astro:content';
+import sigs from '../data/sigs.json';
+
+const reportEntries = await getCollection('reports');
+const reports = reportEntries
+  .sort((left, right) => right.data.date.valueOf() - left.data.date.valueOf())
+  .slice(0, 4)
+  .map((report) => ({
+    slug: report.id,
+    title: report.data.title,
+    date: new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' }).format(report.data.date),
+    category: report.data.category,
+    abstract: report.data.abstract,
+    authors: report.data.authors,
+    chartImage: report.data.chartImage,
+  }));
+
+const sigCards = sigs.map((sig) => ({
+  ...sig,
+  charterUrl: `https://github.com/AtlasVanguard-ma/governance/blob/main/${sig.repoPath}CHARTER.md`,
+}));
+---
+
+<BaseLayout
+  title="Home"
+  description="AtlasVanguard is a Moroccan financial observability initiative focused on transparent and reproducible research infrastructure."
+>
+  <section class="page-frame site-shell">
+    <div class="hero-panel surface">
+      <div class="hero-grid">
+        <div class="headline-block">
+          <h1>AtlasVanguard</h1>
+          <h2>Moroccan Financial Observability &amp; Market Intelligence</h2>
+          <p class="page-intro">
+            Build transparent and reproducible financial observability infrastructure for Morocco’s evolving markets, enabling structured understanding of derivatives dynamics, market structure, and systemic behavior.
+          </p>
+          <div class="inline-links">
+            <a href="/project/" class="cta-link">Explore the project</a>
+            <a href="https://github.com/AtlasVanguard-ma/governance" target="_blank" rel="noopener noreferrer">Governance model → GitHub governance repo</a>
+          </div>
+        </div>
+        <aside class="hero-aside">
+          <p class="small-note">
+            Public outputs are organized as reports, RFCs, and SIG workstreams. The site privileges readability, replication, and institutional continuity over promotional language.
+          </p>
+        </aside>
+      </div>
+    </div>
+
+    <section class="rule-section">
+      <div class="section-title-row">
+        <h2>Why Morocco</h2>
+      </div>
+      <div class="two-col">
+        <article class="card surface">
+          <span class="eyebrow">The Transition</span>
+          <h3>Loi n° 42-12 and the new observability burden</h3>
+          <p>
+            As derivatives structures enter the market, institutions need a clearer view of volatility regimes, cross-asset correlation, and the channels through which systemic risk can accumulate. Monitoring can no longer stop at price levels or simple turnover summaries.
+          </p>
+          <p class="muted">
+            AtlasVanguard treats this as a research and transparency problem first: measure the market, document the method, and keep the output reproducible.
+          </p>
+        </article>
+        <article class="card surface">
+          <span class="eyebrow">Our Response</span>
+          <h3>Modular infrastructure with governed collaboration</h3>
+          <p>
+            The initiative combines public methodology, structured reporting, and SIG-based workstreams so contributors can work in a durable institution rather than an ad hoc project. That model supports peer review, continuity, and explicit accountability.
+          </p>
+          <p class="muted">
+            Every output should be traceable to a known method, a known SIG, and a known governance path.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <div class="section-title-row">
+        <h2>Governance &amp; SIGs</h2>
+        <a href="/sigs/">View all SIGs</a>
+      </div>
+      <p class="content">
+        AtlasVanguard is guided by a Steering Committee and organized into Special Interest Groups (SIGs).
+      </p>
+      <div class="card-grid cols-2">
+        {sigCards.map((sig) => (
+          <article class="card compact surface">
+            <h3>{sig.name}</h3>
+            <p class="muted">{sig.focus}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <div class="section-title-row">
+        <h2>Latest Reports</h2>
+        <a href="/reports/">Browse reports</a>
+      </div>
+      <div class="card-list tight">
+        {reports.map((report) => <ReportCard report={report} reportUrl={`/reports/${report.slug}/`} />)}
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <article class="card surface">
+        <h2>Join through a structured intake process</h2>
+        <p>
+          Contributors apply through the membership form, are reviewed against the initiative’s research and engineering focus, and then join the Slack workspace after acceptance.
+        </p>
+        <div class="inline-links">
+          <a href="/contribute/">Membership and onboarding</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf3-1hb6cY9J7ClfZIyjDZiUm_W6vpb5KEUl-1e2r6fi2-p8Q/viewform" target="_blank" rel="noopener noreferrer">Application form</a>
+        </div>
+      </article>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "SIG-QUANT",
+    "slug": "sig-quant",
+    "focus": "Quantitative models, returns, volatility, beta, exposure analysis",
+    "chair": "TBD",
+    "cadence": "Biweekly",
+    "repoPath": "sigs/sig-quant/"
+  },
+  {
+    "name": "SIG-MARKET-STRUCTURE",
+    "slug": "sig-market-structure",
+    "focus": "Spot vs futures interaction, MASI/sector structure, price discovery",
+    "chair": "TBD",
+    "cadence": "Biweekly",
+    "repoPath": "sigs/sig-market-structure/"
+  },
+  {
+    "name": "SIG-RISK",
+    "slug": "sig-risk",
+    "focus": "Systemic risk, stress propagation, correlation breakdown, regime behavior",
+    "chair": "TBD",
+    "cadence": "Biweekly",
+    "repoPath": "sigs/sig-risk/"
+  },
+  {
+    "name": "SIG-DATA-INFRASTRUCTURE",
+    "slug": "sig-data-infrastructure",
+    "focus": "Data ingestion, normalization, dataset integrity, internal data APIs",
+    "chair": "TBD",
+    "cadence": "Biweekly",
+    "repoPath": "sigs/sig-data-infrastructure/"
+  },
+  {
+    "name": "SIG-OBSERVABILITY-COMMUNICATION",
+    "slug": "sig-observability-communication",
+    "focus": "Dashboards, visualization, reporting layer, communication of market signals",
+    "chair": "TBD",
+    "cadence": "Biweekly",
+    "repoPath": "sigs/sig-observability-communication/"
+  }
+]

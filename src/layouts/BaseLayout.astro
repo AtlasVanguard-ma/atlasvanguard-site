@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+
+const { title, description = '', activePath = Astro.url.pathname } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/project/', label: 'Project' },
+  { href: '/governance/', label: 'Governance' },
+  { href: '/sigs/', label: 'SIGs' },
+  { href: '/rfcs/', label: 'RFCs' },
+  { href: '/reports/', label: 'Reports' },
+  { href: '/contribute/', label: 'Join Us' },
+];
+
+const isActive = (href) => {
+  if (href === '/') {
+    return activePath === '/';
+  }
+
+  return activePath === href || activePath.startsWith(href);
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · AtlasVanguard</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="nav-bar">
+      <div class="site-shell">
+        <a class="brand" href="/" aria-label="AtlasVanguard home">
+          <img src="/images/main.png" alt="" class="brand-mark" />
+          <span>AtlasVanguard</span>
+        </a>
+        <nav aria-label="Primary">
+          <div class="nav-links">
+            {navLinks.map((link) => (
+              <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="site-shell">
+        <div class="footer-grid">
+          <section>
+            <h3>About</h3>
+            <p>
+              AtlasVanguard builds transparent and reproducible financial observability infrastructure for Morocco's evolving markets.
+            </p>
+            <p>
+              The initiative is research-first, non-speculative, and governed through public documentation.
+            </p>
+          </section>
+          <section>
+            <h3>Research</h3>
+            <p>
+              Reports, methods, and SIG outputs are organized to support review, replication, and institutional continuity.
+            </p>
+            <div class="inline-links">
+              <a href="/reports/">Reports</a>
+              <a href="/rfcs/">RFCs</a>
+              <a href="/sigs/">SIGs</a>
+            </div>
+          </section>
+          <section>
+            <h3>Connect</h3>
+            <p>
+              Review the governance repository, then use the membership form to enter the structured intake process.
+            </p>
+            <div class="inline-links">
+              <a href="https://github.com/AtlasVanguard-ma/governance" target="_blank" rel="noopener noreferrer">Governance repo</a>
+              <a href="/contribute/">Join Us</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

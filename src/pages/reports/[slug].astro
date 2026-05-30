@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const reports = await getCollection('reports');
+
+  return reports.map((report) => ({
+    params: { slug: report.id },
+    props: { report },
+  }));
+}
+
+const report = await getEntry('reports', Astro.params.slug);
+if (!report) {
+  throw new Error(`Missing report entry for ${Astro.params.slug}`);
+}
+
+const { Content } = await render(report);
+const formatDate = (date) => new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric' }).format(date);
+---
+
+<BaseLayout title={report.data.title} description={report.data.abstract}>
+  <section class="page-frame site-shell">
+    <article class="content">
+      <span class="breadcrumb">Report</span>
+      <h1>{report.data.title}</h1>
+      <div class="meta-row">
+        <span class="badge">{report.data.category}</span>
+        <span>{formatDate(report.data.date)}</span>
+      </div>
+      <p class="page-intro">{report.data.abstract}</p>
+      <p class="small-note">Authors: {report.data.authors.join(', ')}</p>
+
+      {report.data.chartImage ? (
+        <figure class="chart-frame">
+          <img src={report.data.chartImage} alt="" />
+          <figcaption class="chart-caption">Placeholder chart image associated with this report.</figcaption>
+        </figure>
+      ) : null}
+
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </section>
+</BaseLayout>

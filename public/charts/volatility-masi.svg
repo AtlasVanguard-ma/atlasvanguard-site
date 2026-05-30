@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder chart for MASI volatility">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <rect x="40" y="40" width="720" height="420" rx="4" fill="#fafaf8" stroke="#e5e1dc"/>
+  <path d="M90 360 L190 320 L290 340 L390 240 L490 265 L590 180 L690 205" fill="none" stroke="#2c5f7c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M90 360 L190 320 L290 340 L390 240 L490 265 L590 180 L690 205 L690 410 L90 410 Z" fill="#9b7d3c" opacity="0.08"/>
+  <g stroke="#e5e1dc" stroke-width="1">
+    <line x1="90" y1="410" x2="690" y2="410"/>
+    <line x1="90" y1="320" x2="690" y2="320"/>
+    <line x1="90" y1="230" x2="690" y2="230"/>
+  </g>
+  <text x="90" y="90" font-family="Inter, Arial, sans-serif" font-size="28" fill="#1a1a1a">MASI 30d Realized Volatility</text>
+  <text x="90" y="125" font-family="Inter, Arial, sans-serif" font-size="18" fill="#5a5855">Placeholder graphic for observability reports</text>
+</svg>

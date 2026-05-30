@@ -1,0 +1,382 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const missionPoints = [
+  'Support transparent financial research',
+  'Provide a governed structure for collaborative market observability work',
+  'Improve understanding of Moroccan market structure and market evolution',
+  'Encourage reproducible, evidence-based quantitative research',
+  'Serve academic, institutional, and research-oriented use cases',
+];
+
+const scopeItems = {
+  inScope: [
+    'Market observability and research',
+    'Quantitative analysis of Moroccan financial markets',
+    'Governance of research methodology',
+    'Cross-domain collaboration between researchers, engineers, and finance practitioners',
+    'Documentation and reproducibility of analytical work',
+    'Educational and institutional research support',
+  ],
+  outOfScope: [
+    'Trading systems or execution systems',
+    'Investment advice or portfolio management',
+    'Predictive trading recommendations',
+    'High-frequency trading infrastructure',
+    'Brokerage or order routing',
+    'Speculative AI systems',
+  ],
+};
+
+const decisionLevels = [
+  {
+    level: 'Everyday decisions',
+    who: 'SIG leads / maintainers',
+    examples: 'Routine coordination, small doc updates, day-to-day work inside a SIG',
+  },
+  {
+    level: 'Methodology changes',
+    who: 'SIG review + RFC process',
+    examples: 'Analytical definitions, research methods, interpretation rules, reporting standards',
+  },
+  {
+    level: 'Structural changes',
+    who: 'Steering Committee',
+    examples: 'SIG creation/retirement, governance overhauls, cross-group conflicts',
+  },
+];
+
+const rfcSteps = ['Draft', 'Review', 'Revise', 'Approve', 'Adopt', 'Validate'];
+
+const ethicsPoints = [
+  'No trading promotion',
+  'No hidden methodology',
+  'No undocumented assumptions',
+  'No manipulation of outputs',
+  'No misrepresentation of uncertainty',
+  'No overclaiming from limited data',
+];
+
+const governanceBrief = [
+  'Every SIG has a lead',
+  'Major changes are documented',
+  'No SIG operates outside the mission',
+  'Cross-group work is coordinated',
+];
+---
+
+<BaseLayout
+  title="Governance"
+  description="AtlasVanguard governance centers a steering committee, SIGs, and an RFC process for transparent and reproducible decisions."
+>
+  <section class="page-frame site-shell">
+    <h1>Governance</h1>
+    <p class="page-intro">AtlasVanguard is governed through an open, documented model that prioritizes transparency, reproducibility, and long-term continuity - without unnecessary bureaucracy.</p>
+
+    <section class="rule-section">
+      <p class="content">
+        Clear governance builds trust, makes collaboration easier, and protects AtlasVanguard’s research-first, non-speculative mission. It also keeps decisions traceable as the initiative grows.
+      </p>
+    </section>
+
+    <section class="rule-section">
+      <div class="two-col">
+        <article class="card surface mission-card">
+          <h2>Our Mission</h2>
+          <ul class="tight-list">
+            {missionPoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </article>
+
+        <article class="card surface scope-card">
+          <h2>What’s in scope / out of scope</h2>
+          <div class="scope-grid">
+            <div>
+              <h3>In scope</h3>
+              <ul class="check-list tight-list">
+                {scopeItems.inScope.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3>Out of scope</h3>
+              <ul class="x-list tight-list">
+                {scopeItems.outOfScope.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>How decisions are made</h2>
+      <p class="small-note">Complex issues escalate through these levels, starting with the smallest group that can resolve them.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Decision Level</th>
+              <th>Who Decides</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            {decisionLevels.map((row) => (
+              <tr>
+                <td>{row.level}</td>
+                <td>{row.who}</td>
+                <td>{row.examples}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Steering Committee</h2>
+      <div class="two-col">
+        <article class="card surface">
+          <p>
+            The Steering Committee is the highest-level guidance body. It sets the overall direction, approves major changes, and resolves cross-group conflicts.
+          </p>
+          <p>
+            The committee is initially founder-led and will expand to include trusted contributors and advisors over time.
+          </p>
+        </article>
+
+        <article class="card surface">
+          <h3>Main responsibilities</h3>
+          <ul class="tight-list">
+            <li>Set the overall direction of the initiative</li>
+            <li>Approve the creation, modification, or retirement of SIGs</li>
+            <li>Approve major governance changes</li>
+            <li>Resolve cross-SIG conflicts</li>
+            <li>Maintain organizational continuity</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Special Interest Groups (SIGs)</h2>
+      <p class="content">
+        SIGs are the working units of AtlasVanguard. Each group owns a specific domain, such as quantitative models or data infrastructure. They operate autonomously within their charters and report to the Steering Committee when needed.
+      </p>
+      <div class="inline-links">
+        <a href="/sigs/">Explore the five active SIGs →</a>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>RFC Process (How changes are proposed)</h2>
+      <p class="content">
+        All meaningful changes to research methods, scope, or governance follow a Request for Comments (RFC) process. This ensures that every change is discussed openly, documented, and traceable.
+      </p>
+      <div class="step-flow" aria-label="RFC lifecycle">
+        {rfcSteps.map((step) => <div class="step-flow-item">{step}</div>)}
+      </div>
+
+      <details class="governance-details">
+        <summary>What does an RFC contain?</summary>
+        <ul class="tight-list">
+          <li>Problem being addressed</li>
+          <li>Proposed change</li>
+          <li>Reason for the change</li>
+          <li>Expected impact</li>
+          <li>Alternatives considered</li>
+          <li>Governance implications</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="rule-section ethics-panel surface">
+      <h2>Research Ethics &amp; Integrity</h2>
+      <div class="ethics-grid">
+        {ethicsPoints.map((point) => <div class="ethics-item">{point}</div>)}
+      </div>
+      <div class="two-col ethics-lower">
+        <div>
+          <h3>Data &amp; scientific integrity</h3>
+          <p>
+            AtlasVanguard documents provenance where possible, keeps methodology transparent, preserves reproducibility, and separates data, analysis, and interpretation.
+          </p>
+        </div>
+        <div>
+          <h3>Core ethics</h3>
+          <p>
+            The initiative avoids hidden assumptions, speculative claims, and any use of research outputs that could blur the line between observation and promotion.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rule-section">
+      <h2>Contribution model</h2>
+      <p class="content">
+        Contributors are welcomed from academia, industry, and the open-source community. All contributions are reviewed for quality, reproducibility, and alignment with the mission. See how to join → <a href="/contribute/">Join Us</a>
+      </p>
+    </section>
+
+    <section class="rule-section">
+      <article class="card surface">
+        <h2>Governance in brief</h2>
+        <ul class="tight-list">
+          {governanceBrief.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </section>
+
+    <section class="rule-section">
+      <div class="inline-links">
+        <a href="https://github.com/AtlasVanguard-ma/governance" target="_blank" rel="noopener noreferrer">View governance on GitHub</a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .mission-card {
+    border-left: 4px solid var(--teal);
+  }
+
+  .scope-card {
+    border-left: 4px solid var(--gold);
+  }
+
+  .tight-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .scope-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .scope-grid h3 {
+    margin-bottom: 0.65rem;
+    font-size: 1.05rem;
+  }
+
+  .check-list,
+  .x-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .check-list li,
+  .x-list li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .check-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  .x-list li::before {
+    content: '×';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .step-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 1rem 0 1.25rem;
+  }
+
+  .step-flow-item {
+    position: relative;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .step-flow-item:not(:last-child)::after {
+    content: '→';
+    margin-left: 0.65rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .governance-details {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    padding: 0.9rem 1rem;
+  }
+
+  .governance-details summary {
+    cursor: pointer;
+    color: var(--gold);
+    font-weight: 700;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .governance-details summary::after {
+    content: '+';
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  .governance-details[open] summary::after {
+    content: '−';
+  }
+
+  .governance-details ul {
+    margin-top: 1rem;
+  }
+
+  .ethics-panel {
+    border-left: 4px solid var(--gold);
+    background: #fffdf8;
+  }
+
+  .ethics-grid {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1rem 0 1.25rem;
+  }
+
+  .ethics-item {
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .ethics-lower {
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: 720px) {
+    .scope-grid,
+    .ethics-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ethics-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

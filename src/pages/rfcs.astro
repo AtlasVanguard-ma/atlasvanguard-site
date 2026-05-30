@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const rfcs = [
+  {
+    number: 'RFC-001',
+    title: 'X',
+    status: 'X',
+    author: 'AtlasVanguard',
+    date: '2026-04-18',
+  }
+];
+---
+
+<BaseLayout
+  title="RFCs"
+  description="AtlasVanguard uses a public RFC process to keep major methodological and governance changes transparent."
+>
+  <section class="page-frame site-shell">
+    <span class="page-kicker">RFCs</span>
+    <h1>Requests for Comment</h1>
+    <p class="page-intro">
+      All meaningful changes to methodology, governance, or scope follow the RFC process to ensure transparency, reproducibility, and traceability.
+    </p>
+
+    <section class="rule-section">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Author</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rfcs.map((rfc) => (
+              <tr>
+                <td>{rfc.number}</td>
+                <td>{rfc.title}</td>
+                <td>{rfc.status}</td>
+                <td>{rfc.author}</td>
+                <td>{rfc.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small-note" style="margin-top: 0.75rem;">
+        The full list lives in the governance repository’s RFC folder.
+      </p>
+      <div class="inline-links">
+        <a href="https://github.com/AtlasVanguard-ma/governance/tree/main/rfc" target="_blank" rel="noopener noreferrer">Browse RFC folder</a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

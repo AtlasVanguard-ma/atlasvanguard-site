@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ReportCard from '../components/ReportCard.astro';
+import { getCollection } from 'astro:content';
+
+const formatDate = (date) =>
+  new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' }).format(date);
+
+const reportEntries = await getCollection('reports');
+const reports = reportEntries
+  .sort((left, right) => right.data.date.valueOf() - left.data.date.valueOf())
+  .map((report) => ({
+    slug: report.id,
+    title: report.data.title,
+    date: formatDate(report.data.date),
+    category: report.data.category,
+    abstract: report.data.abstract,
+    authors: report.data.authors,
+    chartImage: report.data.chartImage,
+  }));
+
+const categories = ['All', ...new Set(reports.map((report) => report.category))];
+---
+
+<BaseLayout
+  title="Reports"
+  description="AtlasVanguard publishes peer-reviewed, reproducible analysis of Moroccan financial markets."
+>
+  <section class="page-frame site-shell">
+    <span class="page-kicker">Reports</span>
+    <h1>Research Reports &amp; Outputs</h1>
+    <p class="page-intro">Peer-reviewed, reproducible analysis of Moroccan financial markets.</p>
+
+    <section class="rule-section">
+      <div class="filter-bar">
+        <label for="report-filter">Filter by category</label>
+        <select id="report-filter" name="report-filter">
+          {categories.map((category) => <option value={category}>{category}</option>)}
+        </select>
+      </div>
+      <p class="small-note" style="margin-top: 0.75rem;">With JavaScript disabled, all reports remain visible.</p>
+    </section>
+
+    <section id="report-list" class="rule-section card-list">
+      {reports.map((report) => <ReportCard report={report} reportUrl={`/reports/${report.slug}/`} />)}
+    </section>
+
+    <script type="module">
+      const select = document.querySelector('#report-filter');
+      const items = Array.from(document.querySelectorAll('#report-list [data-category]'));
+
+      if (select) {
+        select.addEventListener('change', () => {
+          const selected = select.value;
+          items.forEach((item) => {
+            const matches = selected === 'All' || item.dataset.category === selected;
+            item.hidden = !matches;
+          });
+        });
+      }
+    </script>
+  </section>
+</BaseLayout>

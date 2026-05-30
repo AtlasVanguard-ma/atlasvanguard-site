@@ -1,0 +1,16 @@
+---
+const { sig, sigUrl, showLink = false } = Astro.props;
+const charterUrl = sig.repoPath
+  ? `https://github.com/AtlasVanguard-ma/governance/blob/main/${sig.repoPath}CHARTER.md`
+  : sig.charterUrl;
+---
+
+<article class="card sig-card surface">
+  <div class="meta-row">
+    {sig.cadence ? <span class="badge">{sig.cadence}</span> : null}
+    {sig.chair ? <span>Chair: {sig.chair}</span> : null}
+  </div>
+  <h3>{showLink ? <a href={sigUrl}>{sig.name}</a> : sig.name}</h3>
+  <p class="muted">{sig.focus || sig.scope}</p>
+  {charterUrl ? <p class="small-note"><a href={charterUrl} target="_blank" rel="noopener noreferrer">View charter</a></p> : null}
+</article>

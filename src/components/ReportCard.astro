@@ -1,0 +1,22 @@
+---
+const { report, reportUrl } = Astro.props;
+---
+
+<article class="card report-card surface" data-category={report.category}>
+  {report.chartImage ? (
+    <a href={reportUrl} class="card-link" aria-label={report.title}>
+      <img class="report-thumb" src={report.chartImage} alt="" loading="lazy" />
+    </a>
+  ) : (
+    <div class="report-thumb surface" aria-hidden="true"></div>
+  )}
+  <div>
+    <div class="meta-row">
+      <span class="badge">{report.category}</span>
+      <span>{report.date}</span>
+    </div>
+    <h3><a href={reportUrl}>{report.title}</a></h3>
+    <p class="muted">{report.abstract}</p>
+    {report.authors?.length ? <p class="small-note">Authors: {report.authors.join(', ')}</p> : null}
+  </div>
+</article>

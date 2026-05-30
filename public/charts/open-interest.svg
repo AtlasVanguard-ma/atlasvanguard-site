@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder chart for futures open interest">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <rect x="40" y="40" width="720" height="420" rx="4" fill="#fafaf8" stroke="#e5e1dc"/>
+  <g fill="#2c5f7c">
+    <rect x="110" y="310" width="70" height="100"/>
+    <rect x="230" y="270" width="70" height="140"/>
+    <rect x="350" y="215" width="70" height="195"/>
+    <rect x="470" y="165" width="70" height="245"/>
+    <rect x="590" y="235" width="70" height="175"/>
+  </g>
+  <text x="90" y="90" font-family="Inter, Arial, sans-serif" font-size="28" fill="#1a1a1a">Futures Open Interest</text>
+  <text x="90" y="125" font-family="Inter, Arial, sans-serif" font-size="18" fill="#5a5855">Placeholder graphic for market structure coverage</text>
+</svg>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SIGCard from '../components/SIGCard.astro';
+import sigs from '../data/sigs.json';
+
+const sigCards = sigs.map((sig) => ({
+  ...sig,
+  charterUrl: `https://github.com/AtlasVanguard-ma/governance/blob/main/${sig.repoPath}CHARTER.md`,
+}));
+---
+
+<BaseLayout
+  title="SIGs"
+  description="Special Interest Groups are the operational core of AtlasVanguard and own specific domains of financial observability."
+>
+  <section class="page-frame site-shell">
+    <span class="page-kicker">SIGs</span>
+    <h1>Special Interest Groups</h1>
+    <p class="page-intro">
+      SIGs are the operational core of AtlasVanguard. Each group owns a domain of financial observability and operates under a defined charter.
+    </p>
+
+    {sigCards.length > 0 ? (
+      <section class="rule-section card-list">
+        <div class="card-grid cols-2">
+          {sigCards.map((sig) => <SIGCard sig={sig} showLink={false} />)}
+        </div>
+      </section>
+    ) : (
+      <section class="rule-section">
+        <article class="card surface">
+          <p>Special Interest Groups are being defined.</p>
+        </article>
+      </section>
+    )}
+  </section>
+</BaseLayout>

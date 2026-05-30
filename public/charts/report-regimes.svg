@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder report chart">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <rect x="40" y="40" width="720" height="420" rx="4" fill="#fafaf8" stroke="#e5e1dc"/>
+  <g fill="#2c5f7c">
+    <rect x="100" y="320" width="40" height="90"/>
+    <rect x="160" y="290" width="40" height="120"/>
+    <rect x="220" y="250" width="40" height="160"/>
+    <rect x="280" y="310" width="40" height="100"/>
+    <rect x="340" y="210" width="40" height="200"/>
+    <rect x="400" y="185" width="40" height="225"/>
+    <rect x="460" y="245" width="40" height="165"/>
+    <rect x="520" y="160" width="40" height="250"/>
+    <rect x="580" y="275" width="40" height="135"/>
+  </g>
+  <path d="M90 410 L690 410" stroke="#e5e1dc" stroke-width="2"/>
+  <text x="90" y="90" font-family="Inter, Arial, sans-serif" font-size="28" fill="#1a1a1a">Observed Market Regimes</text>
+  <text x="90" y="125" font-family="Inter, Arial, sans-serif" font-size="18" fill="#5a5855">Placeholder chart for reports and MDX pages</text>
+</svg>
+*** End Patch
