@@ -73,6 +73,21 @@ const personaCards = [
             <p class="small-note hero-trust-active">Active now — pipeline ingesting data, models running, governance operational.</p>
           </div>
         </div>
+
+        <aside class="hero-aside">
+          <div class="hero-join-now">
+            <span class="hero-join-label">Why Join Now?</span>
+            <p>
+              AtlasVanguard is in its foundational phase. The analytical core — quantitative engines, market data pipelines, governance structures, and public reporting frameworks — is being built now. This means early contributors shape which risk models become standard, how market structure analytics are visualized, what public outputs look like, and how governance operates in practice.
+            </p>
+            <p class="hero-join-closing">The work has begun. The direction is still being set. That window is open now.</p>
+            <a href={applicationFormUrl} target="_blank" rel="noopener noreferrer" class="hero-join-link">Apply to join →</a>
+          </div>
+          <div class="hero-trust-lines">
+            <p class="small-note">Open, governed, non-speculative. All work is public.</p>
+            <p class="small-note hero-trust-active">Active now — pipeline ingesting data, models running, governance operational.</p>
+          </div>
+        </aside>
       </div>
     </div>
 
@@ -86,22 +101,38 @@ const personaCards = [
       <div class="two-col">
         <article class="card surface">
           <span class="eyebrow">The Transition</span>
-          <h3>Loi n° 42-12 and the new observability burden</h3>
+          <h3>Morocco's derivatives market is now operational</h3>
           <p>
-            As derivatives structures enter the market under the AMMC's oversight, institutions need a clearer view of volatility regimes, cross-asset correlation, and the channels through which systemic risk can accumulate. Monitoring can no longer stop at price levels or simple turnover summaries.
+            On April 6, 2026, Morocco launched its first regulated futures contract — the MASI 20 Futures — on the <a href="https://www.casablancabourse.com/en" target="_blank" rel="noopener noreferrer">Casablanca Stock Exchange</a>. This marked the operational start of derivatives trading under <a href="https://www.ammc.ma/fr/reglementations/loi-ndeg-42-12-relative-au-marche-terme-dinstruments-financiers" target="_blank" rel="noopener noreferrer">Loi n° 42-12</a>, the legal framework governing futures financial instruments, overseen by the <a href="https://www.ammc.ma" target="_blank" rel="noopener noreferrer">AMMC</a>.
           </p>
           <p class="muted">
-            AtlasVanguard treats this as a research and transparency problem first: measure the market, document the method, and keep the output reproducible.
+            The introduction of derivatives fundamentally changes market structure. It introduces new dynamics that traditional monitoring cannot capture:
+          </p>
+          <p class="muted">- Volatility transmission across sectors and instruments</p>
+          <p class="muted">- Cross-asset correlation shifts during stress events</p>
+          <p class="muted">- Hedge positioning and exposure concentration</p>
+          <p class="muted">- Systemic risk propagation channels</p>
+          <p class="muted">- Changes in liquidity formation and price discovery</p>
+          <p class="muted">
+            Monitoring that stops at price levels, volume summaries, or index movements is no longer sufficient. A derivatives-enabled market creates a structural requirement for systematic, ongoing observability — not occasional analysis.
+          </p>
+          <p>
+            This transition creates a requirement for structured, reproducible financial observability infrastructure for Moroccan markets.
           </p>
         </article>
         <article class="card surface">
           <span class="eyebrow">Our Response</span>
-          <h3>Modular infrastructure with governed collaboration</h3>
+          <h3>Infrastructure for financial observability</h3>
           <p>
-            The initiative combines public methodology, structured reporting, and domain-specific teams (Special Interest Groups — SIGs) so contributors can work in a durable institution rather than an ad hoc project. That model supports peer review, continuity, and explicit accountability.
+            AtlasVanguard is a financial observability and research infrastructure initiative — not a product, not a startup, not a trading system. It exists to build the analytical layer that Morocco's evolving markets now require.
           </p>
           <p class="muted">
-            Every output should be traceable to a known method, a known team, and a known governance path.
+         
+          <p>
+            All outputs must be traceable to documented methodology, governed computation, and reproducible data pipelines.
+          </p>
+          <p>
+            The objective is not prediction. The objective is observability.
           </p>
         </article>
       </div>
@@ -283,6 +314,54 @@ const personaCards = [
     font-size: 0.9rem;
   }
 
+  .hero-aside {
+    display: grid;
+    gap: 1rem;
+    align-self: start;
+  }
+
+  .hero-join-now {
+    border-left: 4px solid var(--gold);
+    padding: 0.95rem 1rem 0.95rem 1.05rem;
+    background: color-mix(in srgb, var(--gold) 5%, var(--card));
+    border-radius: 6px;
+  }
+
+  .hero-join-label {
+    display: inline-block;
+    margin-bottom: 0.35rem;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.76rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .hero-join-now p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .hero-join-closing {
+    margin-top: 0.65rem !important;
+    font-weight: 600;
+  }
+
+  .hero-join-link {
+    display: inline-flex;
+    margin-top: 0.8rem;
+    color: var(--gold);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .hero-join-link:hover {
+    text-decoration: underline;
+  }
+
   .section-heading-inline {
     display: inline-flex;
     align-items: center;
@@ -412,6 +491,17 @@ const personaCards = [
   @media (min-width: 820px) {
     .hero-panel {
       padding: 2.4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .headline-block {
+      max-width: 68ch;
     }
 
     .join-card {

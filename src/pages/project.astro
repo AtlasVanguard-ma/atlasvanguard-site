@@ -36,17 +36,50 @@ const engines = [
 
 <BaseLayout title="Project" description="Modular, reproducible financial observability infrastructure for Morocco’s markets.">
   <section class="page-frame site-shell">
-    <span class="page-kicker">Project</span>
-    <h1>Project</h1>
-    <p class="page-intro">Modular, reproducible financial observability infrastructure for Morocco’s evolving markets.</p>
+    <div class="project-hero surface">
+      <div class="project-hero-grid">
+        <div class="project-hero-copy">
+          <span class="page-kicker">Project</span>
+          <h1>Project</h1>
+          <p class="page-intro">Modular, reproducible financial observability infrastructure for Morocco’s evolving markets.</p>
 
-    <p>
-      AtlasVanguard is more than a codebase. It is a shared infrastructure layer where financial domain expertise, quantitative research, and software engineering converge to produce trustworthy market observability. The system ingests raw market data, applies rigorous analytical methods, and surfaces derived metrics that serve researchers, risk analysts, and regulators alike.
-    </p>
+          <p>
+            AtlasVanguard is more than a codebase. It is a shared infrastructure layer where financial domain expertise, quantitative research, and software engineering converge to produce trustworthy market observability. The system ingests raw market data, applies rigorous analytical methods, and surfaces derived metrics that serve researchers, risk analysts, and regulators alike.
+          </p>
 
-    <p>
-      This page describes the core technical system: how data flows from sources to storage, how quant engines produce reproducible analytics, and how the architecture supports transparency and incremental improvement. Whether you come from finance, engineering, or supervision, you should leave with a clear understanding of what AtlasVanguard builds and how it operates.
-    </p>
+          <p>
+            This page describes the core technical system: how data flows from sources to storage, how quant engines produce reproducible analytics, and how the architecture supports transparency and incremental improvement. Whether you come from finance, engineering, or supervision, you should leave with a clear understanding of what AtlasVanguard builds and how it operates.
+          </p>
+        </div>
+
+        <aside class="project-hero-aside card surface">
+          <span class="eyebrow">At a glance</span>
+          <h3>Built for public observability</h3>
+          <p class="muted">
+            The platform is designed to turn market feeds into reproducible signals, documented methods, and reviewable outputs.
+          </p>
+          <div class="project-hero-points">
+            <div>
+              <strong>Sources</strong>
+              <p>YFinance and curated Casablanca CSV feeds.</p>
+            </div>
+            <div>
+              <strong>Storage</strong>
+              <p>Canonical OHLCV data in PostgreSQL.</p>
+            </div>
+            <div>
+              <strong>Outputs</strong>
+              <p>Returns, volatility, correlation, beta, drawdown, and API access.</p>
+            </div>
+          </div>
+          <div class="project-hero-status">
+            <span class="status-pill">Live pipeline</span>
+            <span class="status-pill">Governed methods</span>
+            <span class="status-pill">Public documentation</span>
+          </div>
+        </aside>
+      </div>
+    </div>
 
     <section class="rule-section">
       <div class="callout">
@@ -220,17 +253,105 @@ const engines = [
 </BaseLayout>
 
 <style>
+  .project-hero {
+    padding: 1.25rem;
+  }
+
+  .project-hero-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .project-hero-copy {
+    max-width: 68ch;
+  }
+
+  .project-hero-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-hero-aside {
+    border-left: 4px solid var(--gold);
+    padding: 1.1rem 1.15rem;
+    align-self: start;
+  }
+
+  .project-hero-aside h3 {
+    margin-top: 0;
+  }
+
+  .project-hero-points {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .project-hero-points strong {
+    color: var(--gold);
+    display: inline-block;
+    margin-bottom: 0.15rem;
+  }
+
+  .project-hero-points p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .project-hero-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding: 0.18rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--gold) 10%, var(--card));
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 760px) {
+    .project-hero {
+      padding: 1.6rem;
+    }
+
+    .project-hero-grid {
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+      align-items: stretch;
+      gap: 1.5rem;
+    }
+
+    .project-hero-aside {
+      display: grid;
+      align-content: start;
+    }
+  }
+
   .repo-access-callout {
     border-left: 4px solid var(--gold);
-    background: color-mix(in srgb, var(--gold) 8%, var(--card));
+    background: color-mix(in srgb, var(--gold) 10%, var(--card));
     border-radius: 6px;
-    padding: 0.85rem 1rem;
+    padding: 0.9rem 1rem;
     margin-bottom: 1rem;
   }
 
   .repo-access-callout p {
     margin: 0;
     color: var(--text-muted);
+  }
+
+  .repo-access-callout strong {
+    color: var(--gold);
   }
 
   .callout { border-left:4px solid var(--gold); padding:0.8rem 1rem; background:var(--card); border-radius:6px; margin-bottom:1rem; }
