@@ -58,6 +58,12 @@ const engines = [
     </section>
 
     <section class="rule-section">
+      <div class="repo-access-callout">
+        <p>
+          The core pipeline repository is currently private during the early build-out phase. It is shared with all accepted members. The codebase will be opened to the public as the infrastructure stabilizes. In the meantime, the architecture and decisions are fully documented on this page.
+        </p>
+      </div>
+
       <div style="display: flex; align-items: center; gap: 0.5rem;">
         <Workflow size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
         <h2 style="margin: 0;">Pipeline architecture</h2>
@@ -205,12 +211,28 @@ const engines = [
 
     <section class="rule-section">
       <h2>Source code</h2>
-      <p>The full source is maintained in the private repository(will be public after official release): <a href="https://github.com/AtlasVanguard-ma/atlasvanguard-core" target="_blank" rel="noopener noreferrer">View atlasvanguard-core on GitHub</a></p>
+      <p>
+        The full source is maintained in the private repository during the early build-out phase: <a href="https://github.com/AtlasVanguard-ma/atlasvanguard-core" target="_blank" rel="noopener noreferrer">View atlasvanguard-core on GitHub (member access during early phase)</a>
+      </p>
+      <p class="small-note">Access is currently restricted to members. Public access will follow as part of the roadmap.</p>
     </section>
   </section>
 </BaseLayout>
 
 <style>
+  .repo-access-callout {
+    border-left: 4px solid var(--gold);
+    background: color-mix(in srgb, var(--gold) 8%, var(--card));
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .repo-access-callout p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
   .callout { border-left:4px solid var(--gold); padding:0.8rem 1rem; background:var(--card); border-radius:6px; margin-bottom:1rem; }
   .callout p { margin:0.35rem 0 0 0; color:var(--text); }
 

@@ -2,18 +2,53 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MetricCard from '../components/MetricCard.astro';
 import ReportCard from '../components/ReportCard.astro';
-import { getCollection } from 'astro:content';
 import sigs from '../data/sigs.json';
 import { BASE } from '../lib/site.js';
-import { TrendingUp, Building2, FileText, UserPlus } from 'lucide-astro';
+import {
+  Activity,
+  ArrowRight,
+  Briefcase,
+  Building2,
+  Code,
+  FileText,
+  FlaskConical,
+  GraduationCap,
+  Scale,
+  TrendingUp,
+  UserPlus,
+} from 'lucide-astro';
 
-const reportEntries = await getCollection('reports');
 const reports = [];
 
-const sigCards = sigs.map((sig) => ({
-  ...sig,
-  charterUrl: `https://github.com/AtlasVanguard-ma/governance/blob/main/${sig.repoPath}CHARTER.md`,
-}));
+const applicationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf3-1hb6cY9J7ClfZIyjDZiUm_W6vpb5KEUl-1e2r6fi2-p8Q/viewform';
+
+const personaCards = [
+  {
+    icon: Briefcase,
+    title: 'Finance professionals',
+    body: 'Shape how derivatives, volatility, and market structure are analyzed. Your domain knowledge ensures the models reflect reality, not just math.',
+  },
+  {
+    icon: FlaskConical,
+    title: 'Quants & researchers',
+    body: 'Build, test, and document the statistical engines. Your work becomes part of a public, citable observability infrastructure.',
+  },
+  {
+    icon: Code,
+    title: 'Engineers & data specialists',
+    body: 'Design the ingestion pipelines, databases, and API layers that make observability reliable and reproducible.',
+  },
+  {
+    icon: Scale,
+    title: 'Regulators & policy analysts',
+    body: 'Engage with a transparent research process. Understand the assumptions behind market signals before they reach your desk.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Students & academics',
+    body: "Learn by contributing to real financial infrastructure. You'll be accompanied through onboarding — no prior production experience required.",
+  },
+];
 ---
 
 <BaseLayout
@@ -27,26 +62,25 @@ const sigCards = sigs.map((sig) => ({
           <h1>AtlasVanguard</h1>
           <h2>Moroccan Financial Observability &amp; Market Intelligence</h2>
           <p class="page-intro">
-            Build transparent and reproducible financial observability infrastructure for Morocco’s evolving markets, enabling structured understanding of derivatives dynamics, market structure, and systemic behavior.
+            Build transparent and reproducible financial observability infrastructure for Morocco's evolving markets, enabling structured understanding of derivatives dynamics, market structure, and systemic behavior.
           </p>
-          <div class="inline-links">
-            <a href={`${BASE}project/`} class="cta-link">Explore the project</a>
-            <a href="https://github.com/AtlasVanguard-ma/governance" target="_blank" rel="noopener noreferrer">Governance model → GitHub governance repo</a>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a href={`${BASE}project/`} class="button button-primary">Explore the project</a>
+            <a href={applicationFormUrl} class="button button-secondary" target="_blank" rel="noopener noreferrer">Apply to join</a>
+          </div>
+          <div class="hero-trust-lines">
+            <p class="small-note">Open, governed, non-speculative. All work is public.</p>
+            <p class="small-note hero-trust-active">Active now — pipeline ingesting data, models running, governance operational.</p>
           </div>
         </div>
-        <aside class="hero-aside">
-          <p class="small-note">
-            Public outputs are organized as reports, RFCs, and SIG workstreams. The site privileges readability, replication, and institutional continuity over promotional language.
-          </p>
-        </aside>
       </div>
     </div>
 
     <section class="rule-section">
       <div class="section-title-row">
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <TrendingUp size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
-          <h2 style="margin: 0;">Why Morocco now?</h2>
+        <div class="section-heading-inline">
+          <TrendingUp size={24} stroke-width={1.5} class="section-icon gold" />
+          <h2>Why Morocco now?</h2>
         </div>
       </div>
       <div class="two-col">
@@ -54,7 +88,7 @@ const sigCards = sigs.map((sig) => ({
           <span class="eyebrow">The Transition</span>
           <h3>Loi n° 42-12 and the new observability burden</h3>
           <p>
-            As derivatives structures enter the market, institutions need a clearer view of volatility regimes, cross-asset correlation, and the channels through which systemic risk can accumulate. Monitoring can no longer stop at price levels or simple turnover summaries.
+            As derivatives structures enter the market under the AMMC's oversight, institutions need a clearer view of volatility regimes, cross-asset correlation, and the channels through which systemic risk can accumulate. Monitoring can no longer stop at price levels or simple turnover summaries.
           </p>
           <p class="muted">
             AtlasVanguard treats this as a research and transparency problem first: measure the market, document the method, and keep the output reproducible.
@@ -64,67 +98,324 @@ const sigCards = sigs.map((sig) => ({
           <span class="eyebrow">Our Response</span>
           <h3>Modular infrastructure with governed collaboration</h3>
           <p>
-            The initiative combines public methodology, structured reporting, and SIG-based workstreams so contributors can work in a durable institution rather than an ad hoc project. That model supports peer review, continuity, and explicit accountability.
+            The initiative combines public methodology, structured reporting, and domain-specific teams (Special Interest Groups — SIGs) so contributors can work in a durable institution rather than an ad hoc project. That model supports peer review, continuity, and explicit accountability.
           </p>
           <p class="muted">
-            Every output should be traceable to a known method, a known SIG, and a known governance path.
+            Every output should be traceable to a known method, a known team, and a known governance path.
           </p>
+        </article>
+      </div>
+      <p class="section-callout">→ This is not a theoretical exercise. The pipeline is ingesting real market data. The models are running. Decisions are happening now.</p>
+    </section>
+
+    <section class="rule-section">
+      <div class="section-title-row">
+        <div class="section-heading-inline">
+          <Activity size={24} stroke-width={1.5} class="section-icon teal" />
+          <h2>What we're doing right now</h2>
+        </div>
+      </div>
+      <p class="section-subtitle muted">
+        The pipeline runs. This website is part of the work. The harder decisions — which models, which signals, which standards — are being made transparently, right now.
+      </p>
+      <div class="card-grid cols-3">
+        <article class="card surface workstream-card accent-gold">
+          <span class="workstream-badge gold">INFRASTRUCTURE + WEB</span>
+          <h3>Building the observability platform</h3>
+          <p class="muted">
+            We are actively developing a modular pipeline that ingests Moroccan market data (YFinance, Casablanca historical CSVs), normalizes it into a canonical format, stores it in PostgreSQL, and runs quantitative engines on top. This website you're reading is part of that work — a public portal that will surface reports, metrics, and governance decisions as they happen. The pipeline code is currently shared with members and will open publicly as the infrastructure stabilizes.
+          </p>
+          <a href={`${BASE}project/`} class="workstream-link">See the full architecture →</a>
+        </article>
+
+        <article class="card surface workstream-card accent-teal">
+          <span class="workstream-badge teal">GOVERNANCE</span>
+          <h3>Deciding how we work together</h3>
+          <p class="muted">
+            We are operationalizing a public governance model: a Steering Committee sets direction, Special Interest Groups (SIGs — domain-specific teams) own different parts of the work, and every methodological change goes through a formal RFC process (propose → discuss → approve → adopt). This means no single person can quietly change a calculation. Everything is documented in the open governance repository.
+          </p>
+          <a href="https://github.com/AtlasVanguard-ma/governance" target="_blank" rel="noopener noreferrer" class="workstream-link">Explore the governance repo →</a>
+        </article>
+
+        <article class="card surface workstream-card accent-slate">
+          <span class="workstream-badge slate">MODELS + SIGNALS</span>
+          <h3>Choosing which models and signals matter</h3>
+          <p class="muted">
+            We debate and document every analytical choice: realized vs EWMA volatility, rolling window lengths, benchmark selection for betas, correlation methodologies. We decide which signals to surface — volatility regimes, sector heatmaps, stress indicators — and how to present them so they serve analysts, regulators, and researchers. Nothing is hidden. Every parameter is explicit and approved through RFCs.
+          </p>
+          <a href="https://github.com/AtlasVanguard-ma/governance/tree/main/rfc" target="_blank" rel="noopener noreferrer" class="workstream-link">See current RFCs →</a>
         </article>
       </div>
     </section>
 
     <section class="rule-section">
       <div class="section-title-row">
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <Building2 size={24} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
-          <h2 style="margin: 0;">Governance &amp; SIGs</h2>
+        <div class="section-heading-inline">
+          <Building2 size={24} stroke-width={1.5} class="section-icon gold" />
+          <h2>Who this is for</h2>
         </div>
-        <a href={`${BASE}sigs/`}>View all SIGs</a>
       </div>
-      <p class="content">
-        AtlasVanguard is guided by a Steering Committee and organized into Special Interest Groups (SIGs).
+      <p class="section-subtitle muted">
+        A public observatory only works if finance, engineering, and regulatory professionals can all see themselves in it.
       </p>
-      <div class="card-grid cols-2">
-        {sigCards.map((sig) => (
-          <article class="card compact surface">
-            <h3>{sig.name}</h3>
-            <p class="muted">{sig.focus}</p>
+      <div class="card-grid cols-3 persona-grid">
+        {personaCards.map(({ icon: Icon, title, body }) => (
+          <article class="card surface persona-card">
+            <Icon size={22} stroke-width={1.8} class="persona-icon" />
+            <h3>{title}</h3>
+            <p class="muted">{body}</p>
           </article>
         ))}
       </div>
+      <p class="section-note">
+        All roles are welcome. You don't need to know everything on day one. New members are accompanied through onboarding — you won't be left to figure things out alone.
+      </p>
     </section>
 
     <section class="rule-section">
       <div class="section-title-row">
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <FileText size={24} stroke-width={1.5} style="color: var(--gold); flex-shrink: 0; margin-top: 2px;" />
-          <h2 style="margin: 0;">Latest Reports</h2>
+        <div class="section-heading-inline">
+          <FileText size={24} stroke-width={1.5} class="section-icon gold" />
+          <h2>Latest Reports</h2>
         </div>
-        <a href={`${BASE}reports/`}>Browse reports</a>
+        <a href={`${BASE}reports/`}>Browse all reports</a>
       </div>
       <div class="card-list tight">
         {reports.length > 0 ? (
           reports.map((report) => <ReportCard report={report} reportUrl={`/reports/${report.slug}/`} />)
         ) : (
-          <p class="muted">No reports yet</p>
+          <article class="card surface report-empty">
+            <p>No reports published yet. The first reports will cover volatility regimes and sector correlations.</p>
+            <a href={`${BASE}contribute/`} class="inline-action">Propose a report topic →</a>
+          </article>
         )}
       </div>
     </section>
 
     <section class="rule-section">
-      <article class="card surface">
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <UserPlus size={24} stroke-width={1.5} style="color: var(--teal); flex-shrink: 0; margin-top: 2px;" />
-          <h2 style="margin: 0;">Join through a structured intake process</h2>
+      <article class="card surface join-card">
+        <div class="section-heading-inline join-heading">
+          <UserPlus size={24} stroke-width={1.5} class="section-icon teal" />
+          <h2>Join the observatory</h2>
         </div>
         <p>
-          Contributors apply through the membership form, are reviewed against the initiative’s research and engineering focus, and then join the Slack workspace after acceptance.
+          AtlasVanguard is actively seeking contributors who want to build the analytical layer for Morocco's evolving markets. Whether you're a seasoned quant, a student, or a regulatory analyst, there is a place for you here.
         </p>
-        <div class="inline-links">
-          <a href={`${BASE}contribute/`}>Membership and onboarding</a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf3-1hb6cY9J7ClfZIyjDZiUm_W6vpb5KEUl-1e2r6fi2-p8Q/viewform" target="_blank" rel="noopener noreferrer">Application form</a>
+        <p>
+          <strong>What happens after you apply:</strong> Your application is reviewed by the Steering Committee. Once accepted, you receive a Slack invitation and are paired with an initial guide. You'll spend your first weeks learning the structure, meeting your domain team, and exploring current work — at your own pace. There is no pressure to produce immediately.
+        </p>
+        <div class="join-actions">
+          <a href={applicationFormUrl} class="button button-primary" target="_blank" rel="noopener noreferrer">Apply for membership</a>
+          <a href={`${BASE}contribute/`} class="button button-secondary">Learn more about joining</a>
         </div>
+        <p class="small-note join-footnote">Applications are reviewed regularly. You'll hear back within a few weeks. All backgrounds welcome.</p>
       </article>
     </section>
   </section>
 </BaseLayout>
+
+<style>
+  .hero-actions,
+  .join-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.35rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.8rem;
+    padding: 0.75rem 1.05rem;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      transform 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+  }
+
+  .button-primary {
+    background: var(--nav);
+    color: #fff;
+    border-color: var(--nav);
+  }
+
+  .button-primary:hover {
+    color: #fff;
+    background: #0f1522;
+  }
+
+  .button-secondary {
+    background: transparent;
+    color: var(--nav);
+    border-color: var(--border);
+  }
+
+  .button-secondary:hover {
+    color: var(--teal);
+    border-color: color-mix(in srgb, var(--teal) 35%, var(--border));
+    background: color-mix(in srgb, var(--teal) 5%, transparent);
+  }
+
+  .hero-trust-lines {
+    display: grid;
+    gap: 0.2rem;
+    margin-top: 1rem;
+  }
+
+  .hero-trust-lines .small-note {
+    margin: 0;
+  }
+
+  .hero-trust-active {
+    color: var(--teal);
+    font-size: 0.9rem;
+  }
+
+  .section-heading-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .section-heading-inline h2 {
+    margin: 0;
+  }
+
+  .section-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .section-icon.gold {
+    color: var(--gold);
+  }
+
+  .section-icon.teal {
+    color: var(--teal);
+  }
+
+  .section-subtitle {
+    max-width: 72ch;
+    margin: 0 0 1rem;
+  }
+
+  .section-callout,
+  .section-note {
+    margin: 1rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.96rem;
+  }
+
+  .workstream-card {
+    border-left-width: 4px;
+    border-left-style: solid;
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+
+  .workstream-card.accent-gold {
+    border-left-color: var(--gold);
+  }
+
+  .workstream-card.accent-teal {
+    border-left-color: var(--teal);
+  }
+
+  .workstream-card.accent-slate {
+    border-left-color: #6d7480;
+  }
+
+  .workstream-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.4rem;
+    width: fit-content;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    white-space: nowrap;
+  }
+
+  .workstream-badge.gold {
+    color: #8a6b1f;
+    background: #f3ead5;
+  }
+
+  .workstream-badge.teal {
+    color: #25546f;
+    background: #dcebf2;
+  }
+
+  .workstream-badge.slate {
+    color: #4b5563;
+    background: #e7eaee;
+  }
+
+  .workstream-link,
+  .inline-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    width: fit-content;
+  }
+
+  .persona-grid {
+    align-items: stretch;
+  }
+
+  .persona-card {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    min-height: 100%;
+  }
+
+  .persona-icon {
+    color: var(--teal);
+  }
+
+  .report-empty {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .join-card {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .join-heading {
+    margin-bottom: 0.15rem;
+  }
+
+  .join-footnote {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 820px) {
+    .hero-panel {
+      padding: 2.4rem;
+    }
+
+    .join-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
